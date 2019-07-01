@@ -1,0 +1,28 @@
+---
+
+ - name: Create kubernetes directory
+   file:
+    dest: /ca
+    state: directory
+    owner: kube
+    group: kube
+
+ - name: Copy CA config json file
+   copy:
+     src: ca-config.json
+     dest: /ca/ca-config.json
+     owner: kube
+     group: kube
+
+ - name: Copy CA CSR json file
+   copy:
+     src: ca-csr.json
+     dest: /ca/ca-csr.json
+     owner: kube
+     group: kube
+
+
+ - name: Generate CA cert
+   shell:  cfssl gencert -initca ca-csr.json | cfssljson -bare ca
+   args:
+     chdir: /ca/

@@ -1,0 +1,26 @@
+---
+
+ - name: Download cfssl
+   get_url:
+     url: https://pkg.cfssl.org/R1.2/cfssl_linux-amd64
+     dest: /usr/local/bin/cfssl
+     mode: 0774
+     owner: kube
+     group: kube
+
+ - name: Download cfssljson
+   get_url:
+     url: https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64
+     dest: /usr/local/bin/cfssljson
+     mode: 0774
+     owner: kube
+     group: kube
+
+ # Move this to it's own role.
+ - name: Download kubectl
+   get_url:
+     url: https://storage.googleapis.com/kubernetes-release/release/v1.12.0/bin/linux/amd64/kubectl
+     dest: /usr/local/bin/kubectl
+     mode: 0774
+     owner: kube
+     group: kube
